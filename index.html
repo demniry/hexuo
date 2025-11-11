@@ -12,277 +12,326 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
             line-height: 1.6;
-            color: #2d3748;
-            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 2rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            background: white;
         }
 
         nav {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            letter-spacing: -1px;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
+        .nav-link {
+            color: #666;
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
         }
 
-        .nav-links a:hover {
-            opacity: 0.8;
+        .nav-link:hover {
+            color: #1a1a1a;
+            background: #fafafa;
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
+            padding: 6rem 0 4rem;
             text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
             font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
         }
 
         .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 3rem;
-            opacity: 0.95;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .cta-button {
-            background: white;
-            color: #667eea;
-            padding: 1.2rem 3rem;
+        .cta-primary {
+            background: #1a1a1a;
+            color: white;
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .cta-secondary {
+            background: white;
+            color: #1a1a1a;
+            padding: 1rem 2.5rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
             text-decoration: none;
             display: inline-block;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        .cta-secondary:hover {
+            border-color: #1a1a1a;
+            transform: translateY(-2px);
         }
 
-        /* Hexagon Section */
-        .hexagon-section {
-            padding: 6rem 2rem;
-            background: #f7fafc;
+        /* Concept Section */
+        .concept-section {
+            padding: 5rem 0;
             text-align: center;
         }
 
-        .hexagon-section h2 {
+        .section-title {
             font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
             margin-bottom: 1rem;
-            color: #2d3748;
+            letter-spacing: -1px;
         }
 
-        .hexagon-section .subtitle {
+        .section-subtitle {
             font-size: 1.2rem;
-            color: #718096;
+            color: #666;
             margin-bottom: 4rem;
         }
 
-        .hexagon-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            margin: 0 auto 4rem;
+        .hexagon-visual {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto 3rem;
         }
 
-        .hexagon-svg {
+        .hex-svg {
             width: 100%;
             height: 100%;
         }
 
-        /* Pillars Grid */
+        /* Pillars */
+        .pillars-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
         .pillars-grid {
-            max-width: 1000px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 0 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
         }
 
         .pillar-card {
-            background: white;
+            background: #fafafa;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: currentColor;
+            border-radius: 16px 0 0 16px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .pillar-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            background: white;
+            border-color: currentColor;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
         }
 
+        .pillar-card:hover::before {
+            opacity: 1;
+        }
+
+        .pillar-richesse { color: #FFB800; }
+        .pillar-physique { color: #00D084; }
+        .pillar-mental { color: #0066FF; }
+        .pillar-spiritualite { color: #7C3AED; }
+        .pillar-relations { color: #EC4899; }
+        .pillar-skills { color: #FF6B00; }
+
         .pillar-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
+            display: block;
         }
 
         .pillar-card h3 {
-            font-size: 1.5rem;
+            color: #1a1a1a;
             margin-bottom: 0.5rem;
-            color: #2d3748;
+            font-size: 1.2rem;
+            font-weight: 700;
         }
 
         .pillar-card p {
-            color: #718096;
-            line-height: 1.6;
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        /* How it Works */
-        .how-it-works {
-            padding: 6rem 2rem;
-            background: white;
+        /* How it works */
+        .how-section {
+            padding: 5rem 0;
         }
 
-        .how-it-works h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 4rem;
-            color: #2d3748;
-        }
-
-        .steps {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
-
-        .step {
-            display: flex;
-            align-items: center;
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #f0f0f0;
         }
 
         .step-number {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 48px;
+            height: 48px;
+            background: #1a1a1a;
             color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 800;
             font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.2rem;
             font-weight: 700;
-            flex-shrink: 0;
-        }
-
-        .step-content h3 {
-            font-size: 1.5rem;
+            color: #1a1a1a;
             margin-bottom: 0.5rem;
-            color: #2d3748;
         }
 
-        .step-content p {
-            color: #718096;
+        .step-card p {
+            color: #666;
+            line-height: 1.6;
         }
 
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
+            padding: 5rem 0;
             text-align: center;
+            background: white;
         }
 
         .cta-section h2 {
             font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
         }
 
         .cta-section p {
             font-size: 1.2rem;
+            color: #666;
             margin-bottom: 2rem;
-            opacity: 0.95;
         }
 
         /* Footer */
         footer {
-            background: #2d3748;
-            color: white;
-            padding: 3rem 2rem;
+            padding: 3rem 0;
+            border-top: 1px solid #f0f0f0;
             text-align: center;
+            background: #fafafa;
         }
 
         footer p {
-            opacity: 0.8;
+            color: #666;
+            font-size: 0.95rem;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 968px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .hero p {
-                font-size: 1.1rem;
+            .pillars-grid,
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .hexagon-container {
-                width: 300px;
-                height: 300px;
-            }
-
-            .pillars-grid {
+            .pillars-grid,
+            .steps-grid {
                 grid-template-columns: 1fr;
             }
 
-            .nav-links {
-                display: none;
-            }
-
-            .step {
-                flex-direction: column;
-                text-align: center;
+            .cta-primary,
+            .cta-secondary {
+                display: block;
+                margin: 0.5rem 0;
             }
         }
     </style>
@@ -292,134 +341,138 @@
     <header>
         <nav>
             <div class="logo">Hexuo</div>
-            <ul class="nav-links">
-                <li><a href="#concept">Concept</a></li>
-                <li><a href="#pillars">Les 6 Piliers</a></li>
-                <li><a href="#how">Comment ça marche</a></li>
-            </ul>
+            <a href="dashboard.html" class="nav-link">Voir la démo →</a>
         </nav>
     </header>
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Équilibre ta vie, un apprentissage à la fois</h1>
+        <div class="container">
+            <h1>Équilibre ta vie,<br>un apprentissage à la fois</h1>
             <p>6 piliers. 1 post par jour. Un hexagone qui révèle tes déséquilibres.</p>
-            <button class="cta-button">Commencer maintenant</button>
+            <a href="dashboard.html" class="cta-primary">Découvrir le dashboard →</a>
+            <a href="#concept" class="cta-secondary">En savoir plus</a>
         </div>
     </section>
 
-    <!-- Hexagon Concept -->
-    <section class="hexagon-section" id="concept">
-        <h2>Construis ton hexagone</h2>
-        <p class="subtitle">Chaque côté représente un domaine essentiel de ta vie</p>
-        
-        <div class="hexagon-container">
-            <svg class="hexagon-svg" viewBox="0 0 200 200">
-                <!-- Hexagon -->
-                <polygon points="100,10 173,50 173,130 100,170 27,130 27,50" 
-                         fill="none" 
-                         stroke="#667eea" 
-                         stroke-width="3"/>
-                
-                <!-- Grid lines -->
-                <line x1="100" y1="10" x2="100" y2="170" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="27" y1="50" x2="173" y2="130" stroke="#e2e8f0" stroke-width="1"/>
-                <line x1="27" y1="130" x2="173" y2="50" stroke="#e2e8f0" stroke-width="1"/>
-                
-                <!-- Labels -->
-                <text x="100" y="5" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">💰 Richesse</text>
-                <text x="180" y="55" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">🎯 Skills</text>
-                <text x="180" y="135" text-anchor="start" fill="#2d3748" font-size="10" font-weight="600">❤️ Relations</text>
-                <text x="100" y="185" text-anchor="middle" fill="#2d3748" font-size="10" font-weight="600">✨ Spiritualité</text>
-                <text x="20" y="135" text-anchor="end" fill="#2d3748" font-size="10" font-weight="600">🧠 Mental</text>
-                <text x="20" y="55" text-anchor="end" fill="#2d3748" font-size="10" font-weight="600">💪 Physique</text>
-                
-                <!-- Example data polygon (unbalanced) -->
-                <polygon points="100,40 150,60 140,110 100,130 60,110 50,60" 
-                         fill="rgba(102, 126, 234, 0.2)" 
-                         stroke="#667eea" 
-                         stroke-width="2"/>
-            </svg>
-        </div>
+    <!-- Concept -->
+    <section id="concept" class="concept-section">
+        <div class="container">
+            <h2 class="section-title">Construis ton hexagone</h2>
+            <p class="section-subtitle">Chaque côté représente un domaine essentiel de ta vie</p>
+            
+            <div class="hexagon-visual">
+                <svg class="hex-svg" viewBox="0 0 200 200">
+                    <!-- Grid -->
+                    <line x1="100" y1="20" x2="100" y2="180" stroke="#f0f0f0" stroke-width="1"/>
+                    <line x1="30" y1="60" x2="170" y2="140" stroke="#f0f0f0" stroke-width="1"/>
+                    <line x1="30" y1="140" x2="170" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                    
+                    <!-- Outer hexagon -->
+                    <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" 
+                             fill="none" 
+                             stroke="#e5e5e5" 
+                             stroke-width="2"/>
+                    
+                    <!-- Data hexagon (example) -->
+                    <polygon points="100,40 155,65 145,125 100,150 55,125 50,65" 
+                             fill="#fafafa" 
+                             stroke="#1a1a1a" 
+                             stroke-width="2"/>
+                    
+                    <!-- Colored segments -->
+                    <line x1="100" y1="100" x2="100" y2="40" stroke="#FFB800" stroke-width="3"/>
+                    <line x1="100" y1="100" x2="155" y2="65" stroke="#FF6B00" stroke-width="3"/>
+                    <line x1="100" y1="100" x2="145" y2="125" stroke="#EC4899" stroke-width="3"/>
+                    <line x1="100" y1="100" x2="100" y2="150" stroke="#7C3AED" stroke-width="3"/>
+                    <line x1="100" y1="100" x2="55" y2="125" stroke="#0066FF" stroke-width="3"/>
+                    <line x1="100" y1="100" x2="50" y2="65" stroke="#00D084" stroke-width="3"/>
+                    
+                    <!-- Labels -->
+                    <text x="100" y="15" text-anchor="middle" fill="#1a1a1a" font-size="10" font-weight="600">💰 Richesse</text>
+                    <text x="177" y="63" text-anchor="start" fill="#1a1a1a" font-size="10" font-weight="600">🎯 Skills</text>
+                    <text x="177" y="143" text-anchor="start" fill="#1a1a1a" font-size="10" font-weight="600">❤️ Relations</text>
+                    <text x="100" y="195" text-anchor="middle" fill="#1a1a1a" font-size="10" font-weight="600">✨ Spiritualité</text>
+                    <text x="23" y="143" text-anchor="end" fill="#1a1a1a" font-size="10" font-weight="600">🧠 Mental</text>
+                    <text x="23" y="63" text-anchor="end" fill="#1a1a1a" font-size="10" font-weight="600">💪 Physique</text>
+                </svg>
+            </div>
 
-        <p style="color: #718096; max-width: 600px; margin: 0 auto;">
-            Cet hexagone montre un déséquilibre typique : forte en Richesse et Skills, mais faible en Relations et Spiritualité. Hexuo te rend conscient de ces gaps.
-        </p>
+            <p style="color: #666; max-width: 600px; margin: 0 auto;">
+                Cet hexagone révèle instantanément tes déséquilibres. Tu optimises ta carrière mais négliges ta santé ? Ton hexagone te le montre clairement.
+            </p>
+        </div>
     </section>
 
     <!-- Pillars -->
-    <section class="pillars-grid" id="pillars">
-        <div class="pillar-card">
-            <div class="pillar-icon">💰</div>
-            <h3>Richesse</h3>
-            <p>Argent, carrière, business, investissements et sécurité financière</p>
-        </div>
-        
-        <div class="pillar-card">
-            <div class="pillar-icon">💪</div>
-            <h3>Physique</h3>
-            <p>Sport, nutrition, énergie, santé corporelle et vitalité</p>
-        </div>
-        
-        <div class="pillar-card">
-            <div class="pillar-icon">🧠</div>
-            <h3>Mental</h3>
-            <p>Psychologie, émotions, résilience et clarté d'esprit</p>
-        </div>
-        
-        <div class="pillar-card">
-            <div class="pillar-icon">✨</div>
-            <h3>Spiritualité</h3>
-            <p>Sens, philosophie, méditation et connexion à plus grand</p>
-        </div>
-        
-        <div class="pillar-card">
-            <div class="pillar-icon">❤️</div>
-            <h3>Relations</h3>
-            <p>Amour, amitié, famille et connexions humaines</p>
-        </div>
-        
-        <div class="pillar-card">
-            <div class="pillar-icon">🎯</div>
-            <h3>Skills</h3>
-            <p>Apprentissages, compétences, créativité et maîtrise</p>
+    <section class="pillars-section">
+        <div class="container">
+            <h2 class="section-title">Les 6 piliers d'une vie équilibrée</h2>
+            <p class="section-subtitle">Progresse dans chaque domaine pour construire un hexagone harmonieux</p>
+            
+            <div class="pillars-grid">
+                <div class="pillar-card pillar-richesse">
+                    <span class="pillar-icon">💰</span>
+                    <h3>Richesse</h3>
+                    <p>Carrière, argent, investissements et sécurité financière</p>
+                </div>
+
+                <div class="pillar-card pillar-physique">
+                    <span class="pillar-icon">💪</span>
+                    <h3>Physique</h3>
+                    <p>Sport, nutrition, énergie et santé corporelle</p>
+                </div>
+
+                <div class="pillar-card pillar-mental">
+                    <span class="pillar-icon">🧠</span>
+                    <h3>Mental</h3>
+                    <p>Émotions, psychologie, résilience et clarté d'esprit</p>
+                </div>
+
+                <div class="pillar-card pillar-spiritualite">
+                    <span class="pillar-icon">✨</span>
+                    <h3>Spiritualité</h3>
+                    <p>Sens, philosophie, méditation et connexion profonde</p>
+                </div>
+
+                <div class="pillar-card pillar-relations">
+                    <span class="pillar-icon">❤️</span>
+                    <h3>Relations</h3>
+                    <p>Amour, amitié, famille et connexions humaines</p>
+                </div>
+
+                <div class="pillar-card pillar-skills">
+                    <span class="pillar-icon">🎯</span>
+                    <h3>Skills</h3>
+                    <p>Apprentissages, compétences, créativité et maîtrise</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- How it Works -->
-    <section class="how-it-works" id="how">
-        <h2>Comment ça marche</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Choisis ton pilier du jour</h3>
-                    <p>Chaque matin, décide sur quel domaine tu veux progresser aujourd'hui</p>
-                </div>
-            </div>
+    <!-- How it works -->
+    <section class="how-section">
+        <div class="container">
+            <h2 class="section-title">Comment ça marche</h2>
+            <p class="section-subtitle">Trois étapes simples pour transformer ta vie</p>
             
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Partage ton apprentissage</h3>
-                    <p>En fin de journée, écris ce que tu as appris ou réalisé dans ce domaine</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Partage un apprentissage</h3>
+                    <p>Chaque jour, écris ce que tu as appris dans l'un des 6 piliers. Réflexion = progression.</p>
                 </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Gagne de l'expérience</h3>
+                    <p>Chaque post te fait gagner de l'XP. Monte de niveau dans chaque pilier comme dans un jeu.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
                     <h3>Visualise ton équilibre</h3>
-                    <p>Ton hexagone se construit automatiquement et révèle tes patterns</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Ajuste et progresse</h3>
-                    <p>Utilise ces insights pour rééquilibrer ta vie consciemment</p>
+                    <p>Ton hexagone se construit en temps réel et révèle tes patterns. Ajuste ta vie consciemment.</p>
                 </div>
             </div>
         </div>
@@ -427,37 +480,18 @@
 
     <!-- CTA -->
     <section class="cta-section">
-        <h2>Prêt à construire ton hexagone ?</h2>
-        <p>Rejoins Hexuo et commence à équilibrer ta vie dès aujourd'hui</p>
-        <button class="cta-button">Créer mon compte</button>
+        <div class="container">
+            <h2>Prêt à construire ton hexagone ?</h2>
+            <p>Découvre à quoi ressemblera ton dashboard personnel</p>
+            <a href="dashboard.html" class="cta-primary">Voir la démo interactive →</a>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Hexuo. Construis ta vie, un côté à la fois.</p>
+        <div class="container">
+            <p>&copy; 2025 Hexuo. Construis ta vie, un côté à la fois.</p>
+        </div>
     </footer>
-
-    <script>
-        // Smooth scroll pour les liens de navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Animation au clic sur les CTA (pour l'instant juste une alerte)
-        document.querySelectorAll('.cta-button').forEach(button => {
-            button.addEventListener('click', function() {
-                alert('🚀 Bientôt disponible ! Continue de coder pour rendre ça réel.');
-            });
-        });
-    </script>
 </body>
 </html>
