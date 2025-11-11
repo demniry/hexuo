@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Hexuo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Preview Banner */
+        .preview-banner {
+            background: linear-gradient(135deg, #FFB800 0%, #FF6B00 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .preview-banner a {
+            color: white;
+            text-decoration: underline;
+            margin-left: 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 1.5rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .streak-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #FFF5E6;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            border: 2px solid #FFB800;
+        }
+
+        .streak-badge span {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #1a1a1a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+        }
+
+        /* Hexagon Card */
+        .hexagon-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #f0f0f0;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+        }
+
+        .hexagon-container {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .hex-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .level-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .level-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            line-height: 1;
+        }
+
+        .level-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hexagon-tip {
+            background: #fafafa;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+
+        /* Stats Card */
+        .stats-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #f0f0f0;
+        }
+
+        .stat-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.2rem;
+            background: #fafafa;
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .stat-row:hover {
+            background: white;
+            border-color: currentColor;
+            transform: translateX(4px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .stat-details {
+            flex: 1;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-name {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .stat-level {
+            font-weight: 700;
+            color: #1a1a1a;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e5e5e5;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .pillar-richesse { color: #FFB800; }
+        .pillar-physique { color: #00D084; }
+        .pillar-mental { color: #0066FF; }
+        .pillar-spiritualite { color: #7C3AED; }
+        .pillar-relations { color: #EC4899; }
+        .pillar-skills { color: #FF6B00; }
+
+        /* Timeline */
+        .timeline-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #f0f0f0;
+            margin-top: 2rem;
+        }
+
+        .timeline-post {
+            padding: 1.5rem;
+            background: #fafafa;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-pillar {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .post-content {
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .post-xp {
+            display: inline-block;
+            background: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+            color: #666;
+        }
+
+        /* Quick Actions */
+        .actions-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #f0f0f0;
+            margin-top: 2rem;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .action-btn {
+            padding: 1.5rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .action-btn:hover {
+            border-color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hexagon-card {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preview Banner -->
+    <div class="preview-banner">
+        🎮 Mode Preview - Les données affichées sont fictives
+        <a href="index.html">← Retour à l'accueil</a>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Hexuo</div>
+            <div class="user-section">
+                <div class="streak-badge">
+                    <span style="font-size: 1.3rem;">🔥</span>
+                    <span>7 jours</span>
+                </div>
+                <div class="avatar">D</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="dashboard-grid">
+            <!-- Left Column: Hexagon -->
+            <div>
+                <div class="hexagon-card">
+                    <h2 class="card-title">Ton Hexagone</h2>
+                    <div class="hexagon-container">
+                        <svg class="hex-svg" viewBox="0 0 200 200">
+                            <!-- Grid lines -->
+                            <line x1="100" y1="20" x2="100" y2="180" stroke="#f0f0f0" stroke-width="1"/>
+                            <line x1="30" y1="60" x2="170" y2="140" stroke="#f0f0f0" stroke-width="1"/>
+                            <line x1="30" y1="140" x2="170" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                            
+                            <!-- Outer hexagon -->
+                            <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" 
+                                     fill="none" 
+                                     stroke="#e5e5e5" 
+                                     stroke-width="2"/>
+                            
+                            <!-- Data hexagon -->
+                            <polygon points="100,35 155,65 150,125 100,155 50,125 45,65" 
+                                     fill="#fafafa" 
+                                     stroke="#1a1a1a" 
+                                     stroke-width="2"/>
+                            
+                            <!-- Colored segments -->
+                            <line x1="100" y1="100" x2="100" y2="35" stroke="#FFB800" stroke-width="3"/>
+                            <line x1="100" y1="100" x2="155" y2="65" stroke="#FF6B00" stroke-width="3"/>
+                            <line x1="100" y1="100" x2="150" y2="125" stroke="#EC4899" stroke-width="3"/>
+                            <line x1="100" y1="100" x2="100" y2="155" stroke="#7C3AED" stroke-width="3"/>
+                            <line x1="100" y1="100" x2="50" y2="125" stroke="#0066FF" stroke-width="3"/>
+                            <line x1="100" y1="100" x2="45" y2="65" stroke="#00D084" stroke-width="3"/>
+                        </svg>
+                        <div class="level-display">
+                            <div class="level-number">12</div>
+                            <div class="level-label">Niveau</div>
+                        </div>
+                    </div>
+                    <div class="hexagon-tip">
+                        💡 Continue comme ça ! Tes piliers Mental et Spiritualité ont besoin d'attention.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Stats & Timeline -->
+            <div>
+                <!-- Stats -->
+                <div class="stats-card">
+                    <h2 class="card-title">Progression par Pilier</h2>
+                    
+                    <div class="stat-row pillar-richesse">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-details">
+                            <div class="stat-header">
+                                <span class="stat-name">Richesse</span>
+                                <span class="stat-level">Niv. 8</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%; background: #FFB800;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-row pillar-physique">
+                        <div class="stat-icon">💪</div>
+                        <div class="stat-details">
+                            <div class="stat-header">
+                                <span class="stat-name">Physique</span>
+                                <span class="stat-level">Niv. 5</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%; background: #00D084;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-row pillar-mental">
+                        <div class="stat-icon">🧠</div>
+                        <div class="stat-details">
+                            <div class="stat-header">
+                                <span class="stat-name">Mental</span>
+                                <span class="stat-level">Niv. 6</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%; background: #0066FF;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-row pillar-spiritualite">
+                        <div class="stat-icon">✨</div>
+                        <div class="stat-details">
+                            <div class="stat-header">
+                                <span class="stat-name">Spiritualité</span>
+                                <span class="stat-level">Niv. 3</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%; background: #7C3AED;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-row pillar-relations">
+                        <div class="stat-icon">❤️</div>
+                        <div class="stat-details">
+                            <div class="stat-header">
+                                <span class="stat-name">Relations</span>
+                                <span class="stat-level">Niv. 4</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%; background: #EC4899;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-row pillar-skills">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-details">
+                            <div class="stat-header">
+                                <span class="stat-name">Skills</span>
+                                <span class="stat-level">Niv. 9</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%; background: #FF6B00;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline-card">
+                    <h2 class="card-title">Tes derniers apprentissages</h2>
+                    
+                    <div class="timeline-post pillar-skills" style="border-color: #FF6B00;">
+                        <div class="post-header">
+                            <span class="post-pillar" style="color: #FF6B00;">🎯 Skills</span>
+                            <span class="post-date">Aujourd'hui</span>
+                        </div>
+                        <div class="post-content">
+                            J'ai appris que CSS Grid est plus adapté que Flexbox pour des layouts en 2D. Ça simplifie énormément le positionnement des éléments.
+                        </div>
+                        <span class="post-xp">+15 XP</span>
+                    </div>
+
+                    <div class="timeline-post pillar-mental" style="border-color: #0066FF;">
+                        <div class="post-header">
+                            <span class="post-pillar" style="color: #0066FF;">🧠 Mental</span>
+                            <span class="post-date">Hier</span>
+                        </div>
+                        <div class="post-content">
+                            Méditer 10 minutes le matin change radicalement ma clarté mentale pour toute la journée. Je procrastine beaucoup moins.
+                        </div>
+                        <span class="post-xp">+12 XP</span>
+                    </div>
+
+                    <div class="timeline-post pillar-richesse" style="border-color: #FFB800;">
+                        <div class="post-header">
+                            <span class="post-pillar" style="color: #FFB800;">💰 Richesse</span>
+                            <span class="post-date">Il y a 2 jours</span>
+                        </div>
+                        <div class="post-content">
+                            Découvert que les ETF diversifiés sont plus sûrs que les actions individuelles pour débuter en investissement. Moins de stress.
+                        </div>
+                        <span class="post-xp">+10 XP</span>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="actions-card">
+                    <h2 class="card-title">Actions Rapides</h2>
+                    <div class="actions-grid">
+                        <button class="action-btn" onclick="alert('✏️ Fonctionnalité disponible bientôt !')">
+                            <span class="action-icon">✏️</span>
+                            Nouveau Post
+                        </button>
+                        <button class="action-btn" onclick="alert('📊 Fonctionnalité disponible bientôt !')">
+                            <span class="action-icon">📊</span>
+                            Voir Stats
+                        </button>
+                        <button class="action-btn" onclick="alert('🎯 Fonctionnalité disponible bientôt !')">
+                            <span class="action-icon">🎯</span>
+                            Objectifs
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
