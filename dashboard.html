@@ -843,7 +843,8 @@
                     relations: { xp: 0, level: 1 },
                     skills: { xp: 0, level: 1 }
                 },
-                today: { date: new Date().toDateString(), focus: null, actions: [], post: null }
+                today: { date: new Date().toDateString(), focus: null, actions: [], post: null },
+                history: [] // Array of past days
             };
         }
 
@@ -859,6 +860,21 @@
         function updateStreak() {
             const today = new Date().toDateString();
             if (data.today.date !== today) {
+                // Save yesterday's data to history before resetting
+                if (data.today.focus || data.today.actions.length > 0 || data.today.post) {
+                    if (!data.history) data.history = [];
+                    data.history.push({
+                        date: data.today.date,
+                        focus: data.today.focus,
+                        actions: data.today.actions,
+                        post: data.today.post
+                    });
+                    // Keep only last 30 days in history
+                    if (data.history.length > 30) {
+                        data.history = data.history.slice(-30);
+                    }
+                }
+                
                 // Nouveau jour
                 const yesterday = new Date(Date.now() - 86400000).toDateString();
                 if (data.user.lastActive === yesterday) {
@@ -867,6 +883,7 @@
                     data.user.streak = 0;
                 }
                 data.today = { date: today, focus: null, actions: [], post: null };
+                saveData();
             }
         }
 
@@ -1037,8 +1054,22 @@
                 updateCharCount();
             }
 
-            // Weekly XP (last 7 days)
-            const weeklyXP = Math.min(dailyXP * 7, 420); // Simplification
+            // Weekly XP (sum of last 7 days from history)
+            let weeklyXP = dailyXP; // Today's XP
+            
+            // Add XP from previous days if they exist in history
+            if (data.history && Array.isArray(data.history)) {
+                const last7Days = data.history.slice(-6); // Last 6 days (today is already counted)
+                last7Days.forEach(day => {
+                    let dayXP = 0;
+                    if (day.focus?.completed) dayXP += 30;
+                    day.actions?.forEach(a => { if (a.completed) dayXP += 10; });
+                    if (day.post?.completed) dayXP += 10;
+                    weeklyXP += dayXP;
+                });
+            }
+            
+            weeklyXP = Math.min(weeklyXP, 420); // Cap at max
             const weeklyPercent = Math.round((weeklyXP / 420) * 100);
             document.getElementById('weeklyProgress').style.width = `${weeklyPercent}%`;
             document.getElementById('weeklyXP').textContent = `${weeklyXP}/420 XP (${weeklyPercent}%)`;
