@@ -13,32 +13,76 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
-            background: #fafafa;
+            background: linear-gradient(135deg, #a8edea 0%, #e0f7fa 50%, #fed6e3 100%);
+            background-attachment: fixed;
             color: #1a1a1a;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* Preview Banner */
-        .preview-banner {
-            background: linear-gradient(135deg, #FFB800 0%, #FF6B00 100%);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.95rem;
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .preview-banner a {
-            color: white;
-            text-decoration: underline;
-            margin-left: 1rem;
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
         }
 
-        /* Header */
+        .blob:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: #FFB800;
+            top: 20%;
+            left: 10%;
+        }
+
+        .blob:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: #00D084;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .blob:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            background: #EC4899;
+            bottom: 20%;
+            left: 40%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
         .header {
-            background: white;
-            border-bottom: 1px solid #f0f0f0;
             padding: 1.5rem 2rem;
+            position: relative;
+            z-index: 10;
         }
 
         .header-content {
@@ -47,88 +91,323 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 800;
-            color: #1a1a1a;
+            font-weight: 900;
+            background: linear-gradient(135deg, #2C7A9F, #4A9FB8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .user-section {
+        .header-right {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 2rem;
+        }
+
+        .xp-display {
+            text-align: right;
+        }
+
+        .xp-today {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2C7A9F, #4A9FB8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .xp-label {
+            font-size: 0.85rem;
+            color: #666;
         }
 
         .streak-badge {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: #FFF5E6;
+            background: linear-gradient(135deg, #FFB800, #FF6B00);
             padding: 0.6rem 1.2rem;
-            border-radius: 10px;
-            border: 2px solid #FFB800;
-        }
-
-        .streak-badge span {
+            border-radius: 20px;
+            color: white;
             font-weight: 700;
-            color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(255, 184, 0, 0.4);
         }
 
         .avatar {
             width: 40px;
             height: 40px;
-            border-radius: 10px;
-            background: #1a1a1a;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3D8BAF, #5BA3C5);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
+            box-shadow: 0 4px 12px rgba(61, 139, 175, 0.4);
         }
 
-        /* Main Content */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 380px 1fr;
+            grid-template-columns: 1fr 380px;
             gap: 2rem;
+        }
+
+        /* Focus Card */
+        .focus-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 25px;
+            border: 3px solid #1a1a1a;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .focus-card::before {
+            content: '🎯';
+            position: absolute;
+            top: -20px;
+            left: 2rem;
+            background: white;
+            padding: 0 0.5rem;
+            font-size: 2rem;
+            border-radius: 10px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        .xp-badge {
+            background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .task-item:hover {
+            background: white;
+            border-color: #e5e5e5;
+            transform: translateX(4px);
+        }
+
+        .task-item.completed {
+            opacity: 0.6;
+        }
+
+        .checkbox {
+            width: 28px;
+            height: 28px;
+            border: 3px solid #e5e5e5;
+            border-radius: 10px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkbox:hover {
+            border-color: #1a1a1a;
+            transform: scale(1.1);
+        }
+
+        .checkbox.checked {
+            background: linear-gradient(135deg, #00D084, #00A868);
+            border-color: #00D084;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 900;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-text {
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+            align-items: center;
+        }
+
+        .pillar-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.3rem 0.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Actions Card */
+        .actions-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .add-task-btn {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(61, 139, 175, 0.1);
+            border: 2px dashed #3D8BAF;
+            border-radius: 15px;
+            color: #3D8BAF;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .add-task-btn:hover {
+            background: rgba(61, 139, 175, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Post Card */
+        .post-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .post-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: border-color 0.2s;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .post-textarea:focus {
+            outline: none;
+            border-color: #3D8BAF;
+            background: white;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .char-count {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .post-btn {
+            background: linear-gradient(135deg, #3D8BAF, #5BA3C5);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(61, 139, 175, 0.4);
+        }
+
+        .post-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(61, 139, 175, 0.5);
         }
 
         /* Hexagon Card */
         .hexagon-card {
-            background: white;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
             padding: 2rem;
-            border: 1px solid #f0f0f0;
-            height: fit-content;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             position: sticky;
             top: 2rem;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 2rem;
         }
 
         .hexagon-container {
             width: 280px;
             height: 280px;
-            margin: 0 auto 1.5rem;
+            margin: 1.5rem auto;
             position: relative;
-        }
-
-        .hex-svg {
-            width: 100%;
-            height: 100%;
+            filter: drop-shadow(0 8px 20px rgba(102, 126, 234, 0.3));
         }
 
         .level-display {
@@ -137,196 +416,232 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .level-number {
             font-size: 3rem;
-            font-weight: 800;
-            color: #1a1a1a;
+            font-weight: 900;
+            background: linear-gradient(135deg, #2C7A9F, #4A9FB8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             line-height: 1;
         }
 
         .level-label {
             font-size: 0.85rem;
             color: #666;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .hexagon-tip {
-            background: #fafafa;
+        .weekly-progress {
+            background: rgba(61, 139, 175, 0.1);
             padding: 1rem;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            color: #666;
+            border-radius: 15px;
             margin-top: 1rem;
         }
 
-        /* Stats Card */
-        .stats-card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid #f0f0f0;
+        .progress-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3D8BAF 0%, #5BA3C5 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2C7A9F, #4A9FB8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0.5rem;
+        }
+
+        .stats-section {
+            margin-top: 2rem;
         }
 
         .stat-row {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            padding: 1.2rem;
-            background: #fafafa;
-            border-radius: 12px;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
             margin-bottom: 0.75rem;
+            border-left: 4px solid;
             transition: all 0.2s;
-            border: 2px solid transparent;
-            cursor: pointer;
         }
 
         .stat-row:hover {
             background: white;
-            border-color: currentColor;
             transform: translateX(4px);
         }
 
         .stat-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
+            font-size: 1.8rem;
         }
 
         .stat-details {
             flex: 1;
         }
 
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
         .stat-name {
-            font-weight: 600;
+            font-weight: 700;
             color: #1a1a1a;
         }
 
         .stat-level {
-            font-weight: 700;
-            color: #1a1a1a;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: #666;
         }
 
-        .progress-bar {
-            height: 6px;
-            background: #e5e5e5;
-            border-radius: 10px;
-            overflow: hidden;
-        }
+        .pillar-richesse { border-color: #FFB800; }
+        .pillar-physique { border-color: #00D084; }
+        .pillar-mental { border-color: #0066FF; }
+        .pillar-spiritualite { border-color: #7C3AED; }
+        .pillar-relations { border-color: #EC4899; }
+        .pillar-skills { border-color: #FF6B00; }
 
-        .progress-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 1s ease;
-        }
-
-        .pillar-richesse { color: #FFB800; }
-        .pillar-physique { color: #00D084; }
-        .pillar-mental { color: #0066FF; }
-        .pillar-spiritualite { color: #7C3AED; }
-        .pillar-relations { color: #EC4899; }
-        .pillar-skills { color: #FF6B00; }
-
-        /* Timeline */
-        .timeline-card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid #f0f0f0;
-            margin-top: 2rem;
-        }
-
-        .timeline-post {
-            padding: 1.5rem;
-            background: #fafafa;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            border-left: 4px solid;
-        }
-
-        .post-header {
-            display: flex;
-            justify-content: space-between;
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
             align-items: center;
-            margin-bottom: 0.75rem;
+            justify-content: center;
+            backdrop-filter: blur(5px);
         }
 
-        .post-pillar {
-            font-weight: 700;
-            font-size: 0.9rem;
+        .modal.active {
+            display: flex;
         }
 
-        .post-date {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        .post-content {
-            color: #1a1a1a;
-            line-height: 1.6;
-        }
-
-        .post-xp {
-            display: inline-block;
+        .modal-content {
             background: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 0.75rem;
-            color: #666;
-        }
-
-        /* Quick Actions */
-        .actions-card {
-            background: white;
-            border-radius: 16px;
             padding: 2rem;
-            border: 1px solid #f0f0f0;
-            margin-top: 2rem;
+            border-radius: 25px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .actions-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+        .modal-header {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
         }
 
-        .action-btn {
-            padding: 1.5rem;
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
             border: 2px solid #f0f0f0;
             border-radius: 12px;
-            background: white;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3D8BAF;
+        }
+
+        .pillar-select {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .pillar-option {
+            padding: 1rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            text-align: center;
             cursor: pointer;
             transition: all 0.2s;
-            text-align: center;
-            font-weight: 600;
-            color: #1a1a1a;
         }
 
-        .action-btn:hover {
-            border-color: #1a1a1a;
+        .pillar-option:hover {
+            border-color: currentColor;
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
         }
 
-        .action-icon {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 0.5rem;
+        .pillar-option.selected {
+            border-color: currentColor;
+            background: rgba(255, 255, 255, 0.5);
         }
 
-        /* Responsive */
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3D8BAF, #5BA3C5);
+            color: white;
+            box-shadow: 0 4px 12px rgba(61, 139, 175, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(61, 139, 175, 0.5);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e5e5;
+        }
+
         @media (max-width: 1024px) {
             .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -344,221 +659,524 @@
                 gap: 1rem;
             }
 
-            .actions-grid {
-                grid-template-columns: 1fr;
+            .pillar-select {
+                grid-template-columns: repeat(2, 1fr);
             }
+        }
+
+        /* Celebration animation */
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .celebrating {
+            animation: celebrate 0.5s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Preview Banner -->
-    <div class="preview-banner">
-        🎮 Mode Preview - Les données affichées sont fictives
-        <a href="index.html">← Retour à l'accueil</a>
+    <div class="bg-blobs">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
     </div>
 
-    <!-- Header -->
     <header class="header">
         <div class="header-content">
             <div class="logo">Hexuo</div>
-            <div class="user-section">
+            <div class="header-right">
+                <div class="xp-display">
+                    <div class="xp-today" id="dailyXP">0/60 XP</div>
+                    <div class="xp-label">Aujourd'hui</div>
+                </div>
                 <div class="streak-badge">
                     <span style="font-size: 1.3rem;">🔥</span>
-                    <span>7 jours</span>
+                    <span id="streakCount">0</span> jours
                 </div>
                 <div class="avatar">D</div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="container">
         <div class="dashboard-grid">
-            <!-- Left Column: Hexagon -->
             <div>
-                <div class="hexagon-card">
-                    <h2 class="card-title">Ton Hexagone</h2>
-                    <div class="hexagon-container">
-                        <svg class="hex-svg" viewBox="0 0 200 200">
-                            <!-- Grid lines -->
-                            <line x1="100" y1="20" x2="100" y2="180" stroke="#f0f0f0" stroke-width="1"/>
-                            <line x1="30" y1="60" x2="170" y2="140" stroke="#f0f0f0" stroke-width="1"/>
-                            <line x1="30" y1="140" x2="170" y2="60" stroke="#f0f0f0" stroke-width="1"/>
-                            
-                            <!-- Outer hexagon -->
-                            <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" 
-                                     fill="none" 
-                                     stroke="#e5e5e5" 
-                                     stroke-width="2"/>
-                            
-                            <!-- Data hexagon -->
-                            <polygon points="100,35 155,65 150,125 100,155 50,125 45,65" 
-                                     fill="#fafafa" 
-                                     stroke="#1a1a1a" 
-                                     stroke-width="2"/>
-                            
-                            <!-- Colored segments -->
-                            <line x1="100" y1="100" x2="100" y2="35" stroke="#FFB800" stroke-width="3"/>
-                            <line x1="100" y1="100" x2="155" y2="65" stroke="#FF6B00" stroke-width="3"/>
-                            <line x1="100" y1="100" x2="150" y2="125" stroke="#EC4899" stroke-width="3"/>
-                            <line x1="100" y1="100" x2="100" y2="155" stroke="#7C3AED" stroke-width="3"/>
-                            <line x1="100" y1="100" x2="50" y2="125" stroke="#0066FF" stroke-width="3"/>
-                            <line x1="100" y1="100" x2="45" y2="65" stroke="#00D084" stroke-width="3"/>
-                        </svg>
-                        <div class="level-display">
-                            <div class="level-number">12</div>
-                            <div class="level-label">Niveau</div>
-                        </div>
+                <!-- Focus -->
+                <div class="focus-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Focus du jour</h2>
+                        <span class="xp-badge">30 XP</span>
                     </div>
-                    <div class="hexagon-tip">
-                        💡 Continue comme ça ! Tes piliers Mental et Spiritualité ont besoin d'attention.
+                    <div id="focusContainer">
+                        <button class="add-task-btn" onclick="openFocusModal()">
+                            + Définir mon Focus du jour
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="actions-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Actions du jour</h2>
+                        <span class="xp-badge">20 XP</span>
+                    </div>
+                    <div class="task-list" id="actionsContainer"></div>
+                    <button class="add-task-btn" onclick="openActionModal()" id="addActionBtn">
+                        + Ajouter une action
+                    </button>
+                </div>
+
+                <!-- Post -->
+                <div class="post-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Réflexion du jour</h2>
+                        <span class="xp-badge">10 XP</span>
+                    </div>
+                    <textarea class="post-textarea" id="postText" placeholder="Qu'as-tu appris aujourd'hui ? Quelle réflexion t'accompagne ?" oninput="updateCharCount()"></textarea>
+                    <div class="post-footer">
+                        <span class="char-count" id="charCount">0 caractères</span>
+                        <button class="post-btn" onclick="savePost()">Publier</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Stats & Timeline -->
+            <!-- Right Column -->
             <div>
-                <!-- Stats -->
-                <div class="stats-card">
-                    <h2 class="card-title">Progression par Pilier</h2>
-                    
-                    <div class="stat-row pillar-richesse">
-                        <div class="stat-icon">💰</div>
-                        <div class="stat-details">
-                            <div class="stat-header">
-                                <span class="stat-name">Richesse</span>
-                                <span class="stat-level">Niv. 8</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%; background: #FFB800;"></div>
-                            </div>
+                <div class="hexagon-card">
+                    <h3 class="card-title">Ton Hexagone</h3>
+                    <div class="hexagon-container">
+                        <svg viewBox="0 0 200 200" style="width: 100%; height: 100%;" id="hexagonSVG">
+                            <!-- Will be generated by JS -->
+                        </svg>
+                        <div class="level-display">
+                            <div class="level-number" id="userLevel">1</div>
+                            <div class="level-label">Niveau</div>
                         </div>
                     </div>
 
-                    <div class="stat-row pillar-physique">
-                        <div class="stat-icon">💪</div>
-                        <div class="stat-details">
-                            <div class="stat-header">
-                                <span class="stat-name">Physique</span>
-                                <span class="stat-level">Niv. 5</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 45%; background: #00D084;"></div>
-                            </div>
+                    <div class="weekly-progress">
+                        <div class="progress-label">Progression cette semaine</div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="weeklyProgress" style="width: 0%;"></div>
                         </div>
+                        <div class="progress-text" id="weeklyXP">0/420 XP (0%)</div>
                     </div>
 
-                    <div class="stat-row pillar-mental">
-                        <div class="stat-icon">🧠</div>
-                        <div class="stat-details">
-                            <div class="stat-header">
-                                <span class="stat-name">Mental</span>
-                                <span class="stat-level">Niv. 6</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 60%; background: #0066FF;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-row pillar-spiritualite">
-                        <div class="stat-icon">✨</div>
-                        <div class="stat-details">
-                            <div class="stat-header">
-                                <span class="stat-name">Spiritualité</span>
-                                <span class="stat-level">Niv. 3</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 30%; background: #7C3AED;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-row pillar-relations">
-                        <div class="stat-icon">❤️</div>
-                        <div class="stat-details">
-                            <div class="stat-header">
-                                <span class="stat-name">Relations</span>
-                                <span class="stat-level">Niv. 4</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 40%; background: #EC4899;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-row pillar-skills">
-                        <div class="stat-icon">🎯</div>
-                        <div class="stat-details">
-                            <div class="stat-header">
-                                <span class="stat-name">Skills</span>
-                                <span class="stat-level">Niv. 9</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 80%; background: #FF6B00;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Timeline -->
-                <div class="timeline-card">
-                    <h2 class="card-title">Tes derniers apprentissages</h2>
-                    
-                    <div class="timeline-post pillar-skills" style="border-color: #FF6B00;">
-                        <div class="post-header">
-                            <span class="post-pillar" style="color: #FF6B00;">🎯 Skills</span>
-                            <span class="post-date">Aujourd'hui</span>
-                        </div>
-                        <div class="post-content">
-                            J'ai appris que CSS Grid est plus adapté que Flexbox pour des layouts en 2D. Ça simplifie énormément le positionnement des éléments.
-                        </div>
-                        <span class="post-xp">+15 XP</span>
-                    </div>
-
-                    <div class="timeline-post pillar-mental" style="border-color: #0066FF;">
-                        <div class="post-header">
-                            <span class="post-pillar" style="color: #0066FF;">🧠 Mental</span>
-                            <span class="post-date">Hier</span>
-                        </div>
-                        <div class="post-content">
-                            Méditer 10 minutes le matin change radicalement ma clarté mentale pour toute la journée. Je procrastine beaucoup moins.
-                        </div>
-                        <span class="post-xp">+12 XP</span>
-                    </div>
-
-                    <div class="timeline-post pillar-richesse" style="border-color: #FFB800;">
-                        <div class="post-header">
-                            <span class="post-pillar" style="color: #FFB800;">💰 Richesse</span>
-                            <span class="post-date">Il y a 2 jours</span>
-                        </div>
-                        <div class="post-content">
-                            Découvert que les ETF diversifiés sont plus sûrs que les actions individuelles pour débuter en investissement. Moins de stress.
-                        </div>
-                        <span class="post-xp">+10 XP</span>
-                    </div>
-                </div>
-
-                <!-- Quick Actions -->
-                <div class="actions-card">
-                    <h2 class="card-title">Actions Rapides</h2>
-                    <div class="actions-grid">
-                        <button class="action-btn" onclick="alert('✏️ Fonctionnalité disponible bientôt !')">
-                            <span class="action-icon">✏️</span>
-                            Nouveau Post
-                        </button>
-                        <button class="action-btn" onclick="alert('📊 Fonctionnalité disponible bientôt !')">
-                            <span class="action-icon">📊</span>
-                            Voir Stats
-                        </button>
-                        <button class="action-btn" onclick="alert('🎯 Fonctionnalité disponible bientôt !')">
-                            <span class="action-icon">🎯</span>
-                            Objectifs
-                        </button>
-                    </div>
+                    <div class="stats-section" id="statsContainer"></div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal for Focus/Actions -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <h2 class="modal-header" id="modalTitle">Définir le Focus</h2>
+            <div class="form-group">
+                <label class="form-label">Tâche</label>
+                <input type="text" class="form-input" id="taskInput" placeholder="Ex: Finir le système XP de Hexuo">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Pilier</label>
+                <div class="pillar-select">
+                    <div class="pillar-option pillar-richesse" data-pillar="richesse" onclick="selectPillar('richesse')">
+                        <div style="font-size: 2rem;">💰</div>
+                        <div style="font-size: 0.8rem; font-weight: 700;">Richesse</div>
+                    </div>
+                    <div class="pillar-option pillar-physique" data-pillar="physique" onclick="selectPillar('physique')">
+                        <div style="font-size: 2rem;">💪</div>
+                        <div style="font-size: 0.8rem; font-weight: 700;">Physique</div>
+                    </div>
+                    <div class="pillar-option pillar-mental" data-pillar="mental" onclick="selectPillar('mental')">
+                        <div style="font-size: 2rem;">🧠</div>
+                        <div style="font-size: 0.8rem; font-weight: 700;">Mental</div>
+                    </div>
+                    <div class="pillar-option pillar-spiritualite" data-pillar="spiritualite" onclick="selectPillar('spiritualite')">
+                        <div style="font-size: 2rem;">✨</div>
+                        <div style="font-size: 0.8rem; font-weight: 700;">Spiritualité</div>
+                    </div>
+                    <div class="pillar-option pillar-relations" data-pillar="relations" onclick="selectPillar('relations')">
+                        <div style="font-size: 2rem;">❤️</div>
+                        <div style="font-size: 0.8rem; font-weight: 700;">Relations</div>
+                    </div>
+                    <div class="pillar-option pillar-skills" data-pillar="skills" onclick="selectPillar('skills')">
+                        <div style="font-size: 2rem;">🎯</div>
+                        <div style="font-size: 0.8rem; font-weight: 700;">Skills</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+                <button class="btn btn-primary" onclick="saveTask()">Valider</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialisation
+        const PILLARS = {
+            richesse: { icon: '💰', name: 'Richesse', color: '#FFB800' },
+            physique: { icon: '💪', name: 'Physique', color: '#00D084' },
+            mental: { icon: '🧠', name: 'Mental', color: '#0066FF' },
+            spiritualite: { icon: '✨', name: 'Spiritualité', color: '#7C3AED' },
+            relations: { icon: '❤️', name: 'Relations', color: '#EC4899' },
+            skills: { icon: '🎯', name: 'Skills', color: '#FF6B00' }
+        };
+
+        let currentTaskType = 'focus';
+        let selectedPillar = null;
+
+        // Charger ou initialiser les données
+        function loadData() {
+            const saved = localStorage.getItem('hexuoData');
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return {
+                user: { level: 1, totalXP: 0, streak: 0, lastActive: null },
+                pillars: {
+                    richesse: { xp: 0, level: 1 },
+                    physique: { xp: 0, level: 1 },
+                    mental: { xp: 0, level: 1 },
+                    spiritualite: { xp: 0, level: 1 },
+                    relations: { xp: 0, level: 1 },
+                    skills: { xp: 0, level: 1 }
+                },
+                today: { date: new Date().toDateString(), focus: null, actions: [], post: null }
+            };
+        }
+
+        let data = loadData();
+
+        // Sauvegarder
+        function saveData() {
+            localStorage.setItem('hexuoData', JSON.stringify(data));
+            updateUI();
+        }
+
+        // Vérifier et mettre à jour le streak
+        function updateStreak() {
+            const today = new Date().toDateString();
+            if (data.today.date !== today) {
+                // Nouveau jour
+                const yesterday = new Date(Date.now() - 86400000).toDateString();
+                if (data.user.lastActive === yesterday) {
+                    data.user.streak++;
+                } else if (data.user.lastActive !== today) {
+                    data.user.streak = 0;
+                }
+                data.today = { date: today, focus: null, actions: [], post: null };
+            }
+        }
+
+        // Calculer XP pour niveau
+        function xpForLevel(level) {
+            return Math.floor(50 * Math.pow(level, 1.8));
+        }
+
+        // Ajouter XP à un pilier
+        function addXP(pillar, amount) {
+            data.pillars[pillar].xp += amount;
+            data.user.totalXP += amount;
+            
+            // Check level up
+            while (data.pillars[pillar].xp >= xpForLevel(data.pillars[pillar].level + 1)) {
+                data.pillars[pillar].level++;
+            }
+            
+            // Update global level (average of all pillars)
+            const avgLevel = Math.floor(
+                Object.values(data.pillars).reduce((sum, p) => sum + p.level, 0) / 6
+            );
+            data.user.level = Math.max(avgLevel, 1);
+            
+            data.user.lastActive = new Date().toDateString();
+            saveData();
+        }
+
+        // Modal functions
+        function openFocusModal() {
+            currentTaskType = 'focus';
+            document.getElementById('modalTitle').textContent = 'Définir le Focus du jour';
+            document.getElementById('taskInput').value = '';
+            selectedPillar = null;
+            document.querySelectorAll('.pillar-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('taskModal').classList.add('active');
+        }
+
+        function openActionModal() {
+            if (data.today.actions.length >= 2) {
+                alert('Tu as déjà 2 actions pour aujourd\'hui !');
+                return;
+            }
+            currentTaskType = 'action';
+            document.getElementById('modalTitle').textContent = 'Ajouter une action';
+            document.getElementById('taskInput').value = '';
+            selectedPillar = null;
+            document.querySelectorAll('.pillar-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('taskModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('taskModal').classList.remove('active');
+        }
+
+        function selectPillar(pillar) {
+            selectedPillar = pillar;
+            document.querySelectorAll('.pillar-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector(`[data-pillar="${pillar}"]`).classList.add('selected');
+        }
+
+        function saveTask() {
+            const text = document.getElementById('taskInput').value.trim();
+            if (!text || !selectedPillar) {
+                alert('Remplis tous les champs !');
+                return;
+            }
+
+            const task = {
+                text,
+                pillar: selectedPillar,
+                completed: false,
+                xp: currentTaskType === 'focus' ? 30 : 10
+            };
+
+            if (currentTaskType === 'focus') {
+                data.today.focus = task;
+            } else {
+                data.today.actions.push(task);
+            }
+
+            saveData();
+            closeModal();
+        }
+
+        function toggleTask(type, index = null) {
+            const task = type === 'focus' ? data.today.focus : data.today.actions[index];
+            if (!task) return;
+
+            task.completed = !task.completed;
+            
+            if (task.completed) {
+                addXP(task.pillar, task.xp);
+                // Celebration animation
+                const element = type === 'focus' ? 
+                    document.querySelector('#focusContainer .task-item') :
+                    document.querySelectorAll('#actionsContainer .task-item')[index];
+                if (element) {
+                    element.classList.add('celebrating');
+                    setTimeout(() => element.classList.remove('celebrating'), 500);
+                }
+            } else {
+                addXP(task.pillar, -task.xp);
+            }
+        }
+
+        function savePost() {
+            const text = document.getElementById('postText').value.trim();
+            if (!text) {
+                alert('Écris quelque chose d\'abord !');
+                return;
+            }
+
+            // Demander le pilier pour le post
+            const pillar = prompt('À quel pilier associer ce post ?\n1. Richesse\n2. Physique\n3. Mental\n4. Spiritualité\n5. Relations\n6. Skills');
+            const pillarMap = ['richesse', 'physique', 'mental', 'spiritualite', 'relations', 'skills'];
+            const selectedPillar = pillarMap[parseInt(pillar) - 1];
+
+            if (!selectedPillar) {
+                alert('Pilier invalide !');
+                return;
+            }
+
+            if (!data.today.post) {
+                data.today.post = { text, pillar: selectedPillar, completed: true };
+                addXP(selectedPillar, 10);
+                alert('✅ Post publié ! +10 XP');
+            } else {
+                data.today.post.text = text;
+                saveData();
+                alert('✅ Post mis à jour !');
+            }
+        }
+
+        function updateCharCount() {
+            const text = document.getElementById('postText').value;
+            document.getElementById('charCount').textContent = `${text.length} caractères`;
+        }
+
+        // UI Updates
+        function updateUI() {
+            updateStreak();
+            
+            // Daily XP
+            let dailyXP = 0;
+            if (data.today.focus?.completed) dailyXP += 30;
+            data.today.actions.forEach(a => { if (a.completed) dailyXP += 10; });
+            if (data.today.post?.completed) dailyXP += 10;
+            document.getElementById('dailyXP').textContent = `${dailyXP}/60 XP`;
+
+            // Streak
+            document.getElementById('streakCount').textContent = data.user.streak;
+
+            // Level
+            document.getElementById('userLevel').textContent = data.user.level;
+
+            // Focus
+            renderFocus();
+
+            // Actions
+            renderActions();
+
+            // Post
+            if (data.today.post) {
+                document.getElementById('postText').value = data.today.post.text;
+                updateCharCount();
+            }
+
+            // Weekly XP (last 7 days)
+            const weeklyXP = Math.min(dailyXP * 7, 420); // Simplification
+            const weeklyPercent = Math.round((weeklyXP / 420) * 100);
+            document.getElementById('weeklyProgress').style.width = `${weeklyPercent}%`;
+            document.getElementById('weeklyXP').textContent = `${weeklyXP}/420 XP (${weeklyPercent}%)`;
+
+            // Stats
+            renderStats();
+
+            // Hexagon
+            renderHexagon();
+        }
+
+        function renderFocus() {
+            const container = document.getElementById('focusContainer');
+            if (data.today.focus) {
+                const task = data.today.focus;
+                const pillar = PILLARS[task.pillar];
+                container.innerHTML = `
+                    <div class="task-item ${task.completed ? 'completed' : ''}" onclick="toggleTask('focus')">
+                        <div class="checkbox ${task.completed ? 'checked' : ''}"></div>
+                        <div class="task-content">
+                            <div class="task-text">${task.text}</div>
+                            <div class="task-meta">
+                                <span class="pillar-tag">${pillar.icon} ${pillar.name}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <button class="add-task-btn" onclick="openFocusModal()">
+                        + Définir mon Focus du jour
+                    </button>
+                `;
+            }
+        }
+
+        function renderActions() {
+            const container = document.getElementById('actionsContainer');
+            if (data.today.actions.length === 0) {
+                container.innerHTML = '<p style="color: #999; text-align: center; padding: 2rem;">Aucune action définie</p>';
+            } else {
+                container.innerHTML = data.today.actions.map((task, i) => {
+                    const pillar = PILLARS[task.pillar];
+                    return `
+                        <div class="task-item ${task.completed ? 'completed' : ''}" onclick="toggleTask('action', ${i})">
+                            <div class="checkbox ${task.completed ? 'checked' : ''}"></div>
+                            <div class="task-content">
+                                <div class="task-text">${task.text}</div>
+                                <div class="task-meta">
+                                    <span class="pillar-tag">${pillar.icon} ${pillar.name}</span>
+                                    <span>10 XP</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Update add button
+            const addBtn = document.getElementById('addActionBtn');
+            if (data.today.actions.length >= 2) {
+                addBtn.style.display = 'none';
+            } else {
+                addBtn.style.display = 'block';
+            }
+        }
+
+        function renderStats() {
+            const container = document.getElementById('statsContainer');
+            container.innerHTML = Object.entries(PILLARS).map(([key, pillar]) => {
+                const pillarData = data.pillars[key];
+                const nextLevelXP = xpForLevel(pillarData.level + 1);
+                const progress = Math.round((pillarData.xp / nextLevelXP) * 100);
+                return `
+                    <div class="stat-row pillar-${key}">
+                        <div class="stat-icon">${pillar.icon}</div>
+                        <div class="stat-details">
+                            <div class="stat-name">${pillar.name}</div>
+                            <div class="stat-level">Niveau ${pillarData.level} · ${progress}% vers niveau ${pillarData.level + 1}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderHexagon() {
+            const svg = document.getElementById('hexagonSVG');
+            const pillarKeys = ['richesse', 'skills', 'relations', 'spiritualite', 'mental', 'physique'];
+            const maxLevel = Math.max(...Object.values(data.pillars).map(p => p.level), 5);
+            
+            // Calculate points
+            const points = pillarKeys.map((key, i) => {
+                const angle = (Math.PI / 3) * i - Math.PI / 2;
+                const level = data.pillars[key].level;
+                const distance = 20 + (60 * (level / maxLevel));
+                return {
+                    x: 100 + distance * Math.cos(angle),
+                    y: 100 + distance * Math.sin(angle)
+                };
+            });
+
+            const dataPolygon = points.map(p => `${p.x},${p.y}`).join(' ');
+
+            svg.innerHTML = `
+                <line x1="100" y1="20" x2="100" y2="180" stroke="#f0f0f0" stroke-width="1"/>
+                <line x1="30" y1="60" x2="170" y2="140" stroke="#f0f0f0" stroke-width="1"/>
+                <line x1="30" y1="140" x2="170" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+                
+                <polygon points="100,20 170,60 170,140 100,180 30,140 30,60" 
+                         fill="none" stroke="#e5e5e5" stroke-width="2"/>
+                
+                <polygon points="${dataPolygon}" 
+                         fill="rgba(61, 139, 175, 0.2)" 
+                         stroke="#3D8BAF" stroke-width="3"/>
+                
+                ${pillarKeys.map((key, i) => {
+                    const angle = (Math.PI / 3) * i - Math.PI / 2;
+                    const color = PILLARS[key].color;
+                    return `<line x1="100" y1="100" x2="${points[i].x}" y2="${points[i].y}" 
+                                  stroke="${color}" stroke-width="3" stroke-linecap="round"/>`;
+                }).join('')}
+                
+                <text x="100" y="15" text-anchor="middle" fill="#1a1a1a" font-size="10" font-weight="700">💰</text>
+                <text x="177" y="63" text-anchor="start" fill="#1a1a1a" font-size="10" font-weight="700">🎯</text>
+                <text x="177" y="143" text-anchor="start" fill="#1a1a1a" font-size="10" font-weight="700">❤️</text>
+                <text x="100" y="195" text-anchor="middle" fill="#1a1a1a" font-size="10" font-weight="700">✨</text>
+                <text x="23" y="143" text-anchor="end" fill="#1a1a1a" font-size="10" font-weight="700">🧠</text>
+                <text x="23" y="63" text-anchor="end" fill="#1a1a1a" font-size="10" font-weight="700">💪</text>
+            `;
+        }
+
+        // Initialize
+        updateUI();
+
+        // Close modal on outside click
+        document.getElementById('taskModal').addEventListener('click', (e) => {
+            if (e.target.id === 'taskModal') closeModal();
+        });
+    </script>
 </body>
 </html>
